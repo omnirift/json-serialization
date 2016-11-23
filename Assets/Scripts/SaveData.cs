@@ -19,7 +19,7 @@ public class SaveData
         foreach (ActorData data in actorContainer.actors)
         {
             GameController.CreateActor(data, GameController.playerPath,
-                new Vector3(data.posX, data.posY, data.posZ), Quaternion.identity);
+                data.pos, Quaternion.identity);
         }
 
         OnLoaded();
@@ -29,9 +29,9 @@ public class SaveData
     {
         OnBeforeSave();
 
-        SaveActors(path, actors);
+		SaveActors(path, actors);
 
-        ClearActors();
+		ClearActors();
     }
 
     public static void AddActorData(ActorData data)
@@ -46,26 +46,21 @@ public class SaveData
 
     private static ActorContainer LoadActors(string path)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(ActorContainer));
+        string json = File.ReadAllText(path);
 
-        FileStream stream = new FileStream(path, FileMode.Open);
-
-        ActorContainer actors = serializer.Deserialize(stream) as ActorContainer;
-
-        stream.Close();
-
-        return actors;
+		return JsonUtility.FromJson<ActorContainer>(json);
     }
 
     private static void SaveActors(string path, ActorContainer actors)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(ActorContainer));
+		string json = JsonUtility.ToJson(actors);
 
-        FileStream stream = new FileStream(path, FileMode.Truncate);
+		//File.Create(path);
 
-        serializer.Serialize(stream, actors);
+		StreamWriter sw = System.IO.File.CreateText(path);
+		sw.Close();
 
-        stream.Close();
+		File.WriteAllText(path, json);
     }
 
 }

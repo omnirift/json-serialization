@@ -1,29 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Xml.Serialization;
+using System;
 
 public class Actor : MonoBehaviour {
 
     public ActorData data = new ActorData();
 
     public string name = "actor";
-
+ 
     public float health = 100;
 
     public void StoreData()
     {
         data.name = name;
-        Vector3 pos = transform.position;
-        data.posX = pos.x;
-        data.posY = pos.y;
-        data.posZ = pos.z;
+        data.pos = transform.position;
         data.health = health;
     }
 
     public void LoadData()
     {
         name = data.name;
-        transform.position = new Vector3(data.posX, data.posY, data.posZ);
+		transform.position = data.pos;
         health = data.health;
     }
 
@@ -48,20 +45,12 @@ public class Actor : MonoBehaviour {
 
 }
 
+[Serializable]
 public class ActorData
 {
-    [XmlAttribute("Name")]
     public string name;
 
-    [XmlElement("PosX")]
-    public float posX;
+	public Vector3 pos;
 
-    [XmlElement("PosY")]
-    public float posY;
-
-    [XmlElement("PosZ")]
-    public float posZ;
-
-    [XmlElement("Health")]
     public float health;
 }

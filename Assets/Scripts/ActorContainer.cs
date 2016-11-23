@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Xml.Serialization;
+using System;
 using System.Collections.Generic;
 
-[XmlRoot("ActorCollection")]
+[Serializable]
 public class ActorContainer {
-
-    [XmlArray("Actors")]
-    [XmlArrayItem("Actor")]
-    public List<ActorData> actors = new List<ActorData>();
-
+	public List<ActorData> actors = new List<ActorData>();
 }
