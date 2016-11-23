@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ActorCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Actors>
+    <Actor Name="Player">
+      <PosX>0</PosX>
+      <PosY>1.6</PosY>
+      <PosZ>-9.82</PosZ>
+      <Health>50</Health>
+    </Actor>
+    <Actor Name="Player">
+      <PosX>5</PosX>
+      <PosY>1.6</PosY>
+      <PosZ>8.32</PosZ>
+      <Health>50</Health>
+    </Actor>
+    <Actor Name="Player">
+      <PosX>-13.47</PosX>
+      <PosY>1.6</PosY>
+      <PosZ>0</PosZ>
+      <Health>50</Health>
+    </Actor>
+  </Actors>
+</ActorCollection>
