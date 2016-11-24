@@ -23,15 +23,19 @@ public class SaveData
         }
 
         OnLoaded();
+
+		ClearActorList();
     }
 
     public static void Save(string path, ActorContainer actors)
     {
         OnBeforeSave();
 
+		//ClearSave(path);
+
 		SaveActors(path, actors);
 
-		ClearActors();
+		ClearActorList();
     }
 
     public static void AddActorData(ActorData data)
@@ -39,7 +43,7 @@ public class SaveData
         actorContainer.actors.Add(data);
     }
 
-    public static void ClearActors()
+	public static void ClearActorList()
     {
         actorContainer.actors.Clear();
     }
@@ -55,12 +59,9 @@ public class SaveData
     {
 		string json = JsonUtility.ToJson(actors);
 
-		//File.Create(path);
-
-		StreamWriter sw = System.IO.File.CreateText(path);
+		StreamWriter sw = File.CreateText(path);
 		sw.Close();
 
 		File.WriteAllText(path, json);
     }
-
 }
